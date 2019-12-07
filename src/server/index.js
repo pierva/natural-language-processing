@@ -1,6 +1,7 @@
 var path = require('path')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
+const PORT = 8081
 
 const app = express()
 
@@ -13,8 +14,8 @@ app.get('/', function (req, res) {
 })
 
 // designates what port the app will listen to for incoming requests
-app.listen(8080, function () {
-    console.log('Example app listening on port 8080!')
+app.listen(port, () => {
+    console.log(`Example app listening on port ${PORT}!`)
 })
 
 app.get('/test', function (req, res) {
