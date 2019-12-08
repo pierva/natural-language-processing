@@ -18,7 +18,7 @@ app.get('/', function (req, res) {
 })
 
 // designates what port the app will listen to for incoming requests
-app.listen(port, () => {
+app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}!`)
 })
 
