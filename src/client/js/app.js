@@ -25,12 +25,18 @@ const view = {
         view.eventHandlers();
     },
 
+    updateDOM: (data) => {
+        console.log(data)
+    },
+
     eventHandlers: () => {
         const textForm = document.querySelector('#textForm')
         textForm.addEventListener('submit', (event) => {
             event.preventDefault();
-            Client.handleTextSubmit(event)
-            console.log('submitted')
+            Client.handleSubmit('combined', textForm)
+                .then((data) => {
+                    view.updateDOM(data);
+                })
         })
     }
 }

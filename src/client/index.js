@@ -1,5 +1,5 @@
 import { checkForName } from './js/nameChecker'
-import { handleTextSubmit } from './js/formHandler'
+import { handleSubmit } from './js/formHandler'
 import { octo } from './js/app'
 import './styles/resets.scss'
 import './styles/base.scss'
@@ -10,6 +10,6 @@ import './styles/header.scss'
 const app = octo.init()
 
 export {
-    handleTextSubmit,
+    handleSubmit,
     app
 }
