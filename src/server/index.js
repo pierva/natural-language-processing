@@ -16,12 +16,14 @@ const nlp = new AYLIENTextAPI({
     application_key: process.env.AYLIEN_API_KEY
 })
 
-nlp.sentiment({
-    'text': 'John is a very good football player!'
+nlp.combined({
+    'text': 'John is a very good football player!',
+    'endpoint': ['sentiment', 'summarize', 'hashtags']
   }, function(error, response) {
-    if (error === null) {
-      console.log(response);
+    if (response === null) {
+       console.log(error);
     }
+    console.log(response)
   });
 
 app.use(express.static('dist'))

@@ -1,9 +1,9 @@
-function handleSubmit(event) {
+function handleTextSubmit(event) {
     event.preventDefault()
 
-    // check what text was put into the form field
-    let formText = document.getElementById('name').value
-    Client.checkForName(formText)
+    // Get the text from the text field
+    const formText = document.querySelector('#textForm').value
+    // Client.checkForName(formText)
 
     console.log("::: Form Submitted :::")
     /**
@@ -17,4 +17,4 @@ function handleSubmit(event) {
     })
 }
 
-export { handleSubmit }
+export { handleTextSubmit }
