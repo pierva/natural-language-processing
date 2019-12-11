@@ -33,7 +33,7 @@ const handleSubmit = async (endpoint, textElement) => {
         return data
     } catch (error) {
         console.error(error)
-        return error.json()
+        return error
     }
 }
 

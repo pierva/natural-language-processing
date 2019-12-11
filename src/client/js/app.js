@@ -33,7 +33,7 @@ const view = {
         const textForm = document.querySelector('#textForm')
         textForm.addEventListener('submit', (event) => {
             event.preventDefault();
-            Client.handleSubmit('combined', textForm)
+            Client.handleSubmit('combined', textForm.children[0])
                 .then((data) => {
                     view.updateDOM(data);
                 })
