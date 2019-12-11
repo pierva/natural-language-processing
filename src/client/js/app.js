@@ -4,6 +4,12 @@
  * The application is initiated by calling octo.init()
 */
 
+/**
+* The model holds all the front end static data
+*/
+const model = {
+    domains: ['restaurants', 'hotels', 'cars', 'airlines']
+}
 
 /**
  * octo short for octopus is in charge of connecting the view to the 
@@ -13,6 +19,10 @@
 const octo = {
     init: () => {
         view.init()
+    },
+
+    getDomains: () => {
+        return model.domains
     }
 }
 
@@ -22,18 +32,47 @@ const octo = {
 */
 const view = {
     init: () => {
-        view.eventHandlers();
+        // Wait until the DOM is fully loaded before initializing the view
+        document.addEventListener('DOMContentLoaded', () => {
+            view.eventHandlers();
+            view.initializeSelects(document.querySelector('#domain'),
+                octo.getDomains())
+        })
     },
 
     updateDOM: (data) => {
         console.log(data)
     },
 
+    /**
+     * @param {DOMElement} elem Select element where to append the options
+     * @param {array} options List of options to append to the parent DOMElement
+     */
+    initializeSelects: (elem, options) => {
+        options.forEach(domain => {
+            const option = document.createElement('option')
+            option.setAttribute('name', domain)
+            option.text = domain
+            elem.appendChild(option)
+        });
+    },
+
     eventHandlers: () => {
         const textForm = document.querySelector('#textForm')
+        const reviewForm = document.querySelector('#reviewForm')
         textForm.addEventListener('submit', (event) => {
             event.preventDefault();
             Client.handleSubmit('combined', textForm.children[0])
+                .then((data) => {
+                    view.updateDOM(data);
+                })
+        })
+        reviewForm.addEventListener('submit', (event) => {
+            event.preventDefault()
+            const reviewTextArea = document.querySelector('#reviewArea')
+            const elem = document.querySelector('#domain')
+            const domain = elem.options[elem.selectedIndex].getAttribute('name')
+            Client.handleSubmit('review', reviewTextArea, domain)
                 .then((data) => {
                     view.updateDOM(data);
                 })
