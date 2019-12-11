@@ -27,34 +27,47 @@ const nlp = new AYLIENTextAPI({
     application_key: process.env.AYLIEN_API_KEY
 })
 
-// nlp.combined({
-//     'text': 'John is a very good football player!',
-//     'endpoint': ['sentiment', 'summarize', 'hashtags']
-//   }, function(error, response) {
-//     if (response === null) {
-//        console.log(error);
-//     }
-//     console.log(response)
-//   });
 
 app.use(express.static('dist'))
-
 
 // Serve the home page
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })
 
-
-
-app.get('/test', function (req, res) {
-    res.send(mockAPIResponse)
-})
-
+/**
+ * Endpoint to process general text
+*/
 app.post('/process/combined', (req, res) => {
     const { text } = req.body
-    console.log(req.body);
-    return res.send({'message': 'data received'})
+    nlp.combined({
+        'text': text,
+        'endpoint': ['sentiment', 'summarize', 'hashtags']
+    },  (error, apiResponse) => {
+        if (apiResponse === null || error) {
+            console.log(error);
+            return res.send(error)
+        }
+        return res.send(apiResponse)
+    });
+})
+
+/**
+ * Endpoint to process a review
+*/
+app.post('/process/review', (req, res) => {
+    const { text } = req.body
+    const { domain } = req.body
+    nlp.aspectBasedSentiment({
+        'text': text,
+        'domain': domain
+    },  (error, apiResponse) => {
+        if (apiResponse === null || error) {
+            console.log(error);
+            return res.send(error)
+        }
+        return res.send(apiResponse)
+    });
 })
 
 
