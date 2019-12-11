@@ -58,15 +58,22 @@ app.post('/process/combined', (req, res) => {
 app.post('/process/review', (req, res) => {
     const { text } = req.body
     const { domain } = req.body
+    if (!domain || domain === '') {
+        return res.send({error: 'Provide a domain'})
+    }
     nlp.aspectBasedSentiment({
-        'text': text,
-        'domain': domain
+        'domain': domain,
+        'text': text
     },  (error, apiResponse) => {
-        if (apiResponse === null || error) {
-            console.log(error);
-            return res.send(error)
+        if (error === null) {
+            console.log(apiResponse);
+            return res.send(apiResponse)
         }
-        return res.send(apiResponse)
+        // No error but empty result
+        if (Object.entries(error).length === 0) {
+            return res.send({error: 'No results found'})
+        }
+        return res.send(error)
     });
 })
 
