@@ -3,10 +3,16 @@
 
 
 body {
+    font-size: 16px;
+    font-family: $font-family;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     color: $secondary-color;
+    background: $gradient-color2;  /* fallback for old browsers */
+    background-image: -webkit-linear-gradient(to right, $gradient-color1, $gradient-color2);  /* Chrome 10-25, Safari 5.1-6 */
+    background-image: linear-gradient(to right, $gradient-color1, $gradient-color2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 main {
@@ -14,6 +20,36 @@ main {
 }
 
 section {
-    max-width: 800px;
+    max-width: $max-width;
     margin: 50px auto;
+}
+
+.feedback {
+    max-width: $max-width;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1.5em auto;
+    border: 1px solid;
+    opacity: 0;
+    transition: opacity ease-in-out 0.3s;
+}
+
+.error {
+    color: $error-color;
+    border-color: $error-color;
+}
+
+.success {
+    color: $success-color;
+    border-color: $success-color;
+}
+
+.style-one {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: -webkit-linear-gradient(left, $gradient-color1, $secondary-color, $gradient-color2);
+    background-image: -moz-linear-gradient(left, $gradient-color1, $secondary-color, $gradient-color2);
+    background-image: -ms-linear-gradient(left, $gradient-color1, $secondary-color, $gradient-color2);
+    background-image: -o-linear-gradient(left, $gradient-color1, $secondary-color, $gradient-color2);
 }

@@ -5,4 +5,14 @@ header {
     justify-content: space-between;
     padding: 10px 40px;
     background: $primary-color;
+    align-items: center;
+    box-shadow: #010119 0px 0px 7px 1px;
+}
+
+.logo {
+    background-image: url('../images/logo.png');
+    border-radius: 50%;
+    background-size: cover;
+    width: 40px;
+    height: 40px;
 }
