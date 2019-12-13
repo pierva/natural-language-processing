@@ -33,3 +33,23 @@ form {
     color: $secondary-color;
     padding: 0.5rem;
 }
+
+.container {
+    margin: 0.5rem 0;
+}
+
+.result-header {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.result-items {
+    display: flex;
+}
+
+.item-group {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
