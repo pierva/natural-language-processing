@@ -42,7 +42,7 @@ app.post('/process/combined', (req, res) => {
     const { text } = req.body
     nlp.combined({
         'text': text,
-        'endpoint': ['sentiment', 'summarize', 'hashtags']
+        'endpoint': ['sentiment', 'summarize']
     },  (error, apiResponse) => {
         if (apiResponse === null || error) {
             console.log(error);

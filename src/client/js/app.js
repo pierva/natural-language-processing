@@ -40,8 +40,48 @@ const view = {
         })
     },
 
+    createList: (items) => {
+        const ul = document.createElement('ul')
+        for (let item of items) {
+            const li = document.createElement('li')
+            li.text = item
+            ul.innerHTML = li
+        }
+        return ul
+    },
+
     updateDOM: (data) => {
+        // Expected 3 arrays
         console.log(data)
+        const resultDiv = document.querySelector('.result-items')
+        // Reset the content
+        resultDiv.innerHTML = ''
+        let index
+        data.results.forEach((result, idx) => {
+            if(result.endpoint === 'summarize') index = idx
+            else {
+                resultDiv.innerHTML = 
+                    `<div class="item-group">
+                        <span class="label">Polarity</span>
+                        <span class="item">${result.result.polarity}</span>
+                    </div>
+                    <div class="item-group">
+                        <span class="label">Polarity Confidenxe</span>
+                        <span class="item">${result.result.polarity_confidence}</span>
+                    </div>
+                    <div class="item-group">
+                        <span class="label">Subjectivity</span>
+                        <span class="item">${result.result.subjectivity}</span>
+                    </div>
+                    <div class="item-group">
+                        <span class="label">Subjectivity Confidence</span>
+                        <span class="item">${result.result.subjectivity_confidence}</span>
+                    </div>
+                    `
+            }
+        })
+        
+        return true
     },
 
     /**
