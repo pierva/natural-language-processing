@@ -60,15 +60,37 @@ const view = {
         }, 3000)
     },
 
+    renderReviewResults: (data) => {
+        const container = document.querySelector('#reviewResults .container')
+        container.innerHTML = '<h3 class="result-header">Processed review aspects with confidence in %.'
+        const groupDiv = document.createElement('div')
+        groupDiv.classList.add('result-items')
+        data.aspects.forEach((aspect) => {
+            const div = document.createElement('div')
+            div.classList.add('item-group')
+            div.innerHTML = `
+            <span class="label">Aspect</span>
+            <span class="item">${aspect.aspect}</span>
+            <span class="label">Confidence</span>
+            <span class="item">${(aspect.aspect_confidence*100).toFixed(2)}%</span>
+            <br>
+            <span class="label">Polarity</span>
+            <span class="item">${aspect.polarity}</span>
+            <span class="label">Confidence</span>
+            <span class="item">${(aspect.polarity_confidence*100).toFixed(2)}%</span>`
+            groupDiv.appendChild(div)
+        })
+        container.appendChild(groupDiv)
+    },
+
     updateDOM: (data) => {
+        console.log(data)
 
         if (data.error) {
             view.handleError(data.error)
             return
         }
-        const container = document.querySelector('.container')
-        // Reset the content
-        container.innerHTML = ''
+        const container = document.querySelector('#textResults .container')
         let index
         data.results.forEach((result, idx) => {
             if(result.endpoint === 'summarize') index = idx
@@ -82,7 +104,9 @@ const view = {
                         </div>
                         <div class="item-group">
                             <span class="label">Polarity Confidence</span>
-                            <span class="item">${result.result.polarity_confidence.toFixed(2)}</span>
+                            <span class="item">
+                                ${(result.result.polarity_confidence*100).toFixed(2)}
+                            </span>
                         </div>
                         <div class="item-group">
                             <span class="label">Subjectivity</span>
@@ -90,7 +114,9 @@ const view = {
                         </div>
                         <div class="item-group">
                             <span class="label">Subjectivity Confidence</span>
-                            <span class="item">${result.result.subjectivity_confidence.toFixed(2)}</span>
+                            <span class="item">
+                                ${(result.result.subjectivity_confidence*100).toFixed(2)}
+                            </span>
                         </div>
                     </div>
                     <hr>
@@ -148,7 +174,7 @@ const view = {
             const domain = elem.options[elem.selectedIndex].getAttribute('name')
             Client.handleSubmit('review', reviewTextArea, domain)
                 .then((data) => {
-                    view.updateDOM(data);
+                    view.renderReviewResults(data);
                 })
         })
     }
