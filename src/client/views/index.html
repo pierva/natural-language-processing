@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-     <!-- Responsive viewport, mobile optimized -->
-     <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
-     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
+    <!-- Responsive viewport, mobile optimized -->
+    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,600,700|Ranga:400,700&display=swap"
+        rel="stylesheet">
 
     <title>Natural Language Processing</title>
 </head>
@@ -25,9 +26,8 @@
             <h1 class="main-header">Discover the inside outs of your text.</h1>
             <h4>Type or paste your text in the below field.</h4>
             <form id="textForm" class="" action="#">
-                <textarea id="textArea" name="textArea" rows="10" 
-                class="w-100 input-field"
-                placeholder="Type or paste your text here"></textarea>
+                <textarea id="textArea" name="textArea" rows="10" class="w-100 input-field"
+                    placeholder="Type or paste your text here"></textarea>
                 <input type="submit" value="Submit" class="btn-primary">
             </form>
         </section>
@@ -44,15 +44,14 @@
 
         <section>
             <h1 class="main-header">
-                Find what people really wanted to say in their review. 
+                Find what people really wanted to say in their review.
                 You might be surprised!
             </h1>
             <form id="reviewForm" class="" action>
                 <label for="domain">Select a domain:</label>
                 <select id="domain" class="text-capitalize dropdown"></select>
-                <textarea name="reviewArea" id="reviewArea" rows="10"
-                    class="w-100 input-field" placeholder="Type or paste your review here"
-                    ></textarea>
+                <textarea name="reviewArea" id="reviewArea" rows="10" class="w-100 input-field"
+                    placeholder="Type or paste your review here"></textarea>
                 <input type="submit" value="Submit" class="btn-primary">
             </form>
         </section>
@@ -63,12 +62,22 @@
                     <center>REVIEW RESULTS</center>
                 </div>
             </div>
-            </section>
+        </section>
     </main>
 
     <footer>
         <p>Powered by Aylien</p>
     </footer>
+
+    <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }
+    </script>
 
 </body>
 
