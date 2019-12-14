@@ -34,8 +34,17 @@ form {
     padding: 0.5rem;
 }
 
+#textResults {
+    background: linear-gradient(45deg, $gradient-color2, $gradient-color1);
+    background: -webkit-linear-gradient(45deg, $gradient-color2, $gradient-color1);
+    border-radius: 0.5rem;
+}
+
 .container {
     margin: 0.5rem 0;
+    padding: 0.7em;
+    height: 300px;
+    overflow-y: auto;
 }
 
 .result-header {
@@ -52,4 +61,19 @@ form {
     display: flex;
     flex-direction: column;
     padding: 1rem;
+}
+
+.label {
+    font-size: 1.1em;
+    color: $primary-color;
+    font-weight: 600;
+}
+
+.item {
+    text-transform: capitalize;
+    margin-top: 0.5em;
+}
+
+.list-item{
+    padding: 0.25rem 0;
 }

@@ -50,33 +50,50 @@ const view = {
         return ul
     },
 
+    handleError: (message) => {
+        const feedback = document.querySelector("#feedback")
+        feedback.classList.add('error')
+        feedback.textContent = message
+        feedback.style.opacity = '1'
+        setTimeout(() => {
+            feedback.style.opacity = '0'
+        }, 3000)
+    },
+
     updateDOM: (data) => {
-        // Expected 3 arrays
-        console.log(data)
-        const resultDiv = document.querySelector('.result-items')
+
+        if (data.error) {
+            view.handleError(data.error)
+            return
+        }
+        const container = document.querySelector('.container')
         // Reset the content
-        resultDiv.innerHTML = ''
+        container.innerHTML = ''
         let index
         data.results.forEach((result, idx) => {
             if(result.endpoint === 'summarize') index = idx
             else {
-                resultDiv.innerHTML = 
-                    `<div class="item-group">
-                        <span class="label">Polarity</span>
-                        <span class="item">${result.result.polarity}</span>
+                container.innerHTML = 
+                    `<h3 class="result-header">${result.endpoint}</h3>
+                    <div class="result-items">
+                        <div class="item-group">
+                            <span class="label">Polarity</span>
+                            <span class="item">${result.result.polarity}</span>
+                        </div>
+                        <div class="item-group">
+                            <span class="label">Polarity Confidence</span>
+                            <span class="item">${result.result.polarity_confidence.toFixed(2)}</span>
+                        </div>
+                        <div class="item-group">
+                            <span class="label">Subjectivity</span>
+                            <span class="item">${result.result.subjectivity}</span>
+                        </div>
+                        <div class="item-group">
+                            <span class="label">Subjectivity Confidence</span>
+                            <span class="item">${result.result.subjectivity_confidence.toFixed(2)}</span>
+                        </div>
                     </div>
-                    <div class="item-group">
-                        <span class="label">Polarity Confidenxe</span>
-                        <span class="item">${result.result.polarity_confidence}</span>
-                    </div>
-                    <div class="item-group">
-                        <span class="label">Subjectivity</span>
-                        <span class="item">${result.result.subjectivity}</span>
-                    </div>
-                    <div class="item-group">
-                        <span class="label">Subjectivity Confidence</span>
-                        <span class="item">${result.result.subjectivity_confidence}</span>
-                    </div>
+                    <hr>
                     `
             }
         })
