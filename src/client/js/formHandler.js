@@ -17,11 +17,11 @@ const handleSubmit = async (endpoint, textElement, domain = '') => {
     }
 
     /**
-     * For production dist change 'http://localhost:8081/process' with 
+     * For production dist change 'http://localhost:8081/process/' with 
      * window.location.origin + '/process/'
     */
 
-    const baseUrl = window.location.origin + '/process/'
+    const baseUrl = 'http://localhost:8081/process/'
 
     const response = await fetch(baseUrl + endpoint, {
         method: 'POST',
