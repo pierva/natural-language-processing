@@ -16,13 +16,12 @@ const handleSubmit = async (endpoint, textElement, domain = '') => {
         'domain': domain
     }
 
-    console.log("::: Form Submitted :::")
     /**
-     * For production dist change 'http://localhost:8081/' with 
-     * window.location.origin
+     * For production dist change 'http://localhost:8081/process' with 
+     * window.location.origin + '/process/'
     */
 
-    const baseUrl = 'http://localhost:8081/process/'
+    const baseUrl = window.location.origin + '/process/'
 
     const response = await fetch(baseUrl + endpoint, {
         method: 'POST',
