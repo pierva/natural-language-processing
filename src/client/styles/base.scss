@@ -25,6 +25,13 @@ section {
     padding: 0 0.5em;
 }
 
+.main-header {
+    font-size: 3em;
+    font-weight: 300;
+    margin: 0.5em 0;
+    color: $secondary-color;
+}
+
 .feedback {
     max-width: $max-width;
     border-radius: 0.5rem;
