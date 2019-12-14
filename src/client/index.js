@@ -1,4 +1,3 @@
-import { checkForName } from './js/nameChecker'
 import { handleSubmit } from './js/formHandler'
 import { octo } from './js/app'
 import './styles/resets.scss'
