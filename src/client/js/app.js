@@ -97,6 +97,23 @@ const view = {
                     `
             }
         })
+
+        // This solution has been implemented to avoid nested loops
+        if(index) {
+            const header = document.createElement('h3')
+            header.classList.add('result-header')
+            header.textContent = data.results[index].endpoint
+            const ul = document.createElement('ul')
+            ul.classList.add('p-1')
+            data.results[index].result.sentences.forEach((sentence) => {
+                const li = document.createElement('li')
+                li.classList.add('list-item')
+                li.textContent = sentence
+                ul.appendChild(li)
+            })
+            container.appendChild(header)
+            container.appendChild(ul)
+        }
         
         return true
     },
