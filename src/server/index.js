@@ -40,6 +40,9 @@ app.get('/', function (req, res) {
 */
 app.post('/process/combined', (req, res) => {
     const { text } = req.body
+    if (!text || text.trim() === ''){
+        return res.send({error: "No text to process."})
+    }
     nlp.combined({
         'text': text,
         'endpoint': ['sentiment', 'summarize']
