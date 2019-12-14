@@ -64,6 +64,9 @@ app.post('/process/review', (req, res) => {
     if (!domain || domain === '') {
         return res.send({error: 'Provide a domain'})
     }
+    if (!text || text === "") {
+        return res.send({error: 'Please enter a review to process.'})
+    }
     nlp.aspectBasedSentiment({
         'domain': domain,
         'text': text
