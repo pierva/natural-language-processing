@@ -84,8 +84,6 @@ const view = {
     },
 
     updateDOM: (data) => {
-        console.log(data)
-
         if (data.error) {
             view.handleError(data.error)
             return

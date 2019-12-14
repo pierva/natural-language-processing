@@ -1,6 +1,5 @@
 const path = require('path')
 const express = require('express')
-const mockAPIResponse = require('./mockAPI.js')
 const AYLIENTextAPI = require('aylien_textapi')
 const bodyParser = require('body-parser')
 const cors = require('cors')
@@ -32,7 +31,7 @@ app.use(express.static('dist'))
 
 // Serve the home page
 app.get('/', function (req, res) {
-    res.sendFile('dist/index.html')
+    res.sendFile('./dist/index.html')
 })
 
 /**
