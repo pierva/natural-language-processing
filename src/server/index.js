@@ -35,9 +35,13 @@ app.get('/', function (req, res) {
 })
 
 /**
- * Endpoint to process general text
-*/
-app.post('/process/combined', (req, res) => {
+ * Detached function for combined Aylien API call
+ * @param {obj} req
+ * @param {obj} res
+ * 
+ * @returns {obj} - res.send(obj)
+ */
+const handleCombinedCall = (req, res) => {
     const { text } = req.body
     if (!text || text.trim() === ''){
         return res.send({error: "No text to process."})
@@ -52,12 +56,25 @@ app.post('/process/combined', (req, res) => {
         }
         return res.send(apiResponse)
     });
-})
+}
 
 /**
- * Endpoint to process a review
+ * Endpoint to process general text
 */
-app.post('/process/review', (req, res) => {
+app.post('/process/combined', (req, res) => {
+    return handleCombinedCall(req, res)
+})
+
+
+/**
+ * Detached function for aspect based sentiment analysis - Aylien API
+ * @param {obj} req
+ * @param {obj} res
+ * 
+ * @returns {obj} - res.send(obj)
+ */
+
+ const handleAbsaCall = (req, res) => {    
     const { text } = req.body
     const { domain } = req.body
     if (!domain || domain === '') {
@@ -71,7 +88,6 @@ app.post('/process/review', (req, res) => {
         'text': text
     },  (error, apiResponse) => {
         if (error === null) {
-            console.log(apiResponse);
             return res.send(apiResponse)
         }
         // No error but empty result
@@ -79,7 +95,14 @@ app.post('/process/review', (req, res) => {
             return res.send({error: 'No results found'})
         }
         return res.send(error)
-    });
+    })
+ }
+
+/**
+ * Endpoint to process a review
+*/
+app.post('/process/review', (req, res) => {
+    return handleAbsaCall(req, res)
 })
 
 
@@ -87,3 +110,8 @@ app.post('/process/review', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}!`)
 })
+
+module.exports = {
+    handleAbsaCall,
+    handleCombinedCall
+}
