@@ -21,7 +21,7 @@ const handleSubmit = async (endpoint, text, domain = '') => {
      * window.location.origin + '/process/'
     */
 
-    const baseUrl = 'http://localhost:8081/process/'
+    const baseUrl = window.location.origin + '/process/'
 
     const response = await fetch(baseUrl + endpoint, {
         method: 'POST',
