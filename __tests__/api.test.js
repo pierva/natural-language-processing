@@ -51,7 +51,6 @@ describe('Test the review endpoint - success', () => {
                 text: 'Some dummy text',
                 domain: 'restaurants'
             })
-        console.log(res.text)
         expect(res.statusCode).toEqual(200)
         expect(res.text).not.toBe(undefined)
         expect(JSON.parse(res.text)).toHaveProperty('aspects')
