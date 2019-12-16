@@ -1,6 +1,6 @@
 /**
  * @param {String} endpoint - API endpoint where to fetch the data from 
- * @param {String} textElement - The DOM element (textarea or input) where to get the text to process
+ * @param {String} text - The text to process
  * @param {String} domain - Domain for the aspect based sentiment analysis
  *                          options are 'hotels', 'restaurants', 'cars',
  *                          'airlines'. Default = empty string
@@ -8,11 +8,11 @@
  * @returns {json} - API response in json
  */
 
-const handleSubmit = async (endpoint, textElement, domain = '') => {
+const handleSubmit = async (endpoint, text, domain = '') => {
 
     // Get the text from the text field and add the domain if available
     let formObj = {
-        'text': textElement.value,
+        'text': text,
         'domain': domain
     }
 

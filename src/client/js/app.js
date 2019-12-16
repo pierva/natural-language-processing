@@ -160,7 +160,7 @@ const view = {
         const reviewForm = document.querySelector('#reviewForm')
         textForm.addEventListener('submit', (event) => {
             event.preventDefault();
-            Client.handleSubmit('combined', textForm.children[0])
+            Client.handleSubmit('combined', textForm.children[0].value)
                 .then((data) => {
                     view.updateDOM(data);
                 })
@@ -170,7 +170,7 @@ const view = {
             const reviewTextArea = document.querySelector('#reviewArea')
             const elem = document.querySelector('#domain')
             const domain = elem.options[elem.selectedIndex].getAttribute('name')
-            Client.handleSubmit('review', reviewTextArea, domain)
+            Client.handleSubmit('review', reviewTextArea.value, domain)
                 .then((data) => {
                     view.renderReviewResults(data);
                 })

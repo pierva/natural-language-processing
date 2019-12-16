@@ -52,8 +52,6 @@ const handleCombinedCall = (req, res) => {
         'endpoint': ['sentiment', 'summarize']
     },  (error, apiResponse) => {
         if (apiResponse === null || error) {
-            console.log(error);
-            // res.sendStatus(500)
             return res.status(500).send(error)
         }
         return res.status(503).send(apiResponse)
@@ -80,11 +78,9 @@ app.post('/process/combined', (req, res) => {
     const { text } = req.body
     const { domain } = req.body
     if (!domain || domain === '') {
-        // res.sendStatus(400)
         return res.status(400).send({error: 'Provide a domain'})
     }
     if (!text || text === "") {
-        // res.sendStatus(400)
         return res.status(400).send({error: 'Please enter a review to process.'})
     }
     nlp.aspectBasedSentiment({
@@ -96,7 +92,6 @@ app.post('/process/combined', (req, res) => {
         }
         // No error but empty result
         if (Object.entries(error).length === 0) {
-            // res.sendStatus(404)
             return res.status(404).send({error: 'No results found'})
         }
         console.log(error)
