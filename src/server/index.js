@@ -44,7 +44,6 @@ app.get('/', function (req, res) {
 const handleCombinedCall = (req, res) => {
     const { text } = req.body
     if (!text || text.trim() === ''){
-        // res.sendStatus(400)
         return res.status(400).send({error: "No text to process."})
     }
     nlp.combined({
@@ -52,9 +51,10 @@ const handleCombinedCall = (req, res) => {
         'endpoint': ['sentiment', 'summarize']
     },  (error, apiResponse) => {
         if (apiResponse === null || error) {
+            console.log(error)
             return res.status(500).send(error)
         }
-        return res.status(503).send(apiResponse)
+        return res.send(apiResponse)
     });
 }
 
