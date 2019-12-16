@@ -39,12 +39,13 @@ app.get('/', function (req, res) {
  * @param {obj} req
  * @param {obj} res
  * 
- * @returns {obj} - res.send(obj)
+ * @returns {obj}
  */
 const handleCombinedCall = (req, res) => {
     const { text } = req.body
     if (!text || text.trim() === ''){
-        return res.send({error: "No text to process."})
+        // res.sendStatus(400)
+        return res.status(400).send({error: "No text to process."})
     }
     nlp.combined({
         'text': text,
@@ -52,9 +53,10 @@ const handleCombinedCall = (req, res) => {
     },  (error, apiResponse) => {
         if (apiResponse === null || error) {
             console.log(error);
-            return res.send(error)
+            // res.sendStatus(500)
+            return res.status(500).send(error)
         }
-        return res.send(apiResponse)
+        return res.status(503).send(apiResponse)
     });
 }
 
@@ -71,17 +73,19 @@ app.post('/process/combined', (req, res) => {
  * @param {obj} req
  * @param {obj} res
  * 
- * @returns {obj} - res.send(obj)
+ * @returns {obj}
  */
 
  const handleAbsaCall = (req, res) => {    
     const { text } = req.body
     const { domain } = req.body
     if (!domain || domain === '') {
-        return res.send({error: 'Provide a domain'})
+        // res.sendStatus(400)
+        return res.status(400).send({error: 'Provide a domain'})
     }
     if (!text || text === "") {
-        return res.send({error: 'Please enter a review to process.'})
+        // res.sendStatus(400)
+        return res.status(400).send({error: 'Please enter a review to process.'})
     }
     nlp.aspectBasedSentiment({
         'domain': domain,
@@ -92,9 +96,11 @@ app.post('/process/combined', (req, res) => {
         }
         // No error but empty result
         if (Object.entries(error).length === 0) {
-            return res.send({error: 'No results found'})
+            // res.sendStatus(404)
+            return res.status(404).send({error: 'No results found'})
         }
-        return res.send(error)
+        console.log(error)
+        return res.status(503).send(error)
     })
  }
 
