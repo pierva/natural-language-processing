@@ -31,8 +31,7 @@ app.use(express.static(__dirname + '/dist'))
 
 // Serve the home page
 app.get('/', function (req, res) {
-    // res.sendFile(path.resolve(__dirname, 'dist/index.html'))
-    res.send('This is the homepage')
+    res.sendFile(path.resolve(__dirname, 'dist/index.html'))
 })
 
 /**
@@ -109,8 +108,8 @@ app.post('/process/review', (req, res) => {
 
 
 // Start the server
-app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}!`)
-})
+app.listen(process.env.PORT || PORT, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
 
 module.exports = app
