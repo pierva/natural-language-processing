@@ -31,7 +31,8 @@ app.use(express.static(__dirname + '/dist'))
 
 // Serve the home page
 app.get('/', function (req, res) {
-    res.sendFile(path.resolve(__dirname, 'dist/index.html'));
+    // res.sendFile(path.resolve(__dirname, 'dist/index.html'))
+    res.send('This is the homepage')
 })
 
 /**
