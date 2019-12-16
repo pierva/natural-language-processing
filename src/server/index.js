@@ -27,7 +27,7 @@ const nlp = new AYLIENTextAPI({
 })
 
 
-app.use(express.static('dist'))
+app.use(express.static(__dirname + '/dist'))
 
 // Serve the home page
 app.get('/', function (req, res) {
