@@ -17,11 +17,11 @@ const handleSubmit = async (endpoint, text, domain = '') => {
     }
 
     /**
-     * For production dist change 'http://localhost:8081/process/' with 
+     * For production dist change 'http://localhost:8081' with 
      * window.location.origin + '/process/'
     */
 
-    const baseUrl = window.location.origin + '/process/'
+    const baseUrl = 'http://localhost:8081' + '/process/'
 
     const response = await fetch(baseUrl + endpoint, {
         method: 'POST',
@@ -37,7 +37,7 @@ const handleSubmit = async (endpoint, text, domain = '') => {
         const data = await response.json()
         return data
     } catch (error) {
-        console.error(error)
+        console.log(error)
         return error
     }
 }
