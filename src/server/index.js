@@ -108,8 +108,8 @@ app.post('/process/review', (req, res) => {
 
 
 // Start the server
-app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}!`)
-})
+app.listen(process.env.PORT || PORT, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
 
 module.exports = app
