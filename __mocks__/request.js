@@ -1,5 +1,5 @@
 // __mocks__/request.js
-const data = {
+const mockResponse = {
   "text": "Delicious food. Disappointing service.",
   "domain": "restaurants",
   "aspects": [{
@@ -36,15 +36,21 @@ const data = {
   }]
 }
 
-export default function request(url) {
+export default function request(url, domain) {
+  const domains = ['restaurants', 'hotels', 'car', 'airlines']
+  const isValidDomain = domains.find(element => element === domain)
   return new Promise((resolve, reject) => {
-    const userID = parseInt(url.substr('/users/'.length), 10);
-    process.nextTick(() =>
-      users[userID]
-        ? resolve(users[userID])
-        : reject({
-            error: 'User with ' + userID + ' not found.',
-          }),
-    );
-  });
+    url = url === 'review' ? true : false
+    if(!url) {
+      reject({
+        error: 'Invalid endpoint'
+      })
+    }
+    if(!isValidDomain) {
+      reject({
+        error: 'Invalid domain'
+      })
+    } 
+    resolve(mockResponse)
+  })
 }
