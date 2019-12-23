@@ -1,9 +1,12 @@
 // test formHandler.js
-jest.mock('../__mocks__/request');
+import request from '../request'
+jest.mock('../request');
 
-const client = require('../src/client/js/formHandler')
+const handleSubmit = (endpoint, domain) => {
+    return request(endpoint, domain).then(data => data)
+}
 
 it('It should call the API and return data', () => {
-    return client.handleSubmit('/review', 'Super awesome food', 'restaurant')
-        .then(data => expect(data).not.toBe(undefined));
-  });
+    return handleSubmit('review', 'restaurants')
+        .then(data => expect(data.domain).toBe('restaurants'));
+});
